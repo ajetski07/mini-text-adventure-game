@@ -1,5 +1,6 @@
 const textElement = document.getElementById("text")
 const optionButtonElement = document.getElementById("option-buttons")
+const timerElement = document.getElementById("timer")
 
 let state = {}
 
@@ -39,6 +40,23 @@ function selectOption(option) {
     state = Object.assign(state, option.setState)
     showTextNode(nextTextNodeId)
 }
+let countDown = 60;
+// Setting up the timer to countdown to update every 1 second //
+const x = setInterval(() => {
+    console.log(countDown);
+    countDown--
+
+
+    // Display the result in the element with the id="timer" //
+    document.getElementById("timer").innerHTML = "Time: " + countDown;
+
+    // If the timer runs out display some text //
+    if (countDown < 0) {
+        clearInterval(x);
+        document.getElementById("timer").innerHTML = "Time Expired";
+    }
+
+}, 1000);
 
 const textNodes = [
     {
@@ -225,3 +243,4 @@ const textNodes = [
 ]
 
 startGame();
+x();
